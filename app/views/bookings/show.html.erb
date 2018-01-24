@@ -1,0 +1,13 @@
+<%= @booking.id%>
+<%= @booking.flight.id%>
+<%= @booking.flight.departure_port.location %>
+<%= @booking.flight.arrival_port.location %>
+<%= @booking.flight.departure_date %>
+<%= @booking.flight.arrival_date %>
+</br>
+Passengers
+<% @booking.passengers.each do |passenger| %>
+</br>
+  <%= passenger.name %>
+  <%= passenger.email %>
+<%end%>

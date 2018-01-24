@@ -1,0 +1,20 @@
+<%= @flight.id %>
+<%= @flight.departure_port.location %>
+<%= @flight.arrival_port.location %>
+<%= @flight.departure_date %>
+<%= @flight.arrival_date %>
+
+<%= form_for @booking do |f| %>
+  <%= f.hidden_field(:flight_id, value: @flight.id) %>
+  <% @passenger_list.each do |passenger| %>
+    <%= f.fields_for :passengers, passenger do |p| %> 
+      </br>
+      <%=p.label :name %>
+      <%=p.text_field :name %>
+      <%=p.label :email %>
+      <%=p.email_field :email %>
+    <%end%>
+  <%end%>
+    </br>
+<%= f.submit "Complete Booking" %>
+<%end%>

@@ -1,0 +1,37 @@
+<%=form_tag(flights_path, method: :get) do %>
+  <%= label_tag(:num_pass,"Number of Passengers:")%>
+  <%=select_tag(:num_pass, options_for_select((1..10))) %>
+  <%= label_tag(:departure_port,"Departure Airport:")%>
+  <%=select_tag(:departure_port, options_for_select(@airports)) %>
+  <%= label_tag(:departure_date, "Departure Date")%>
+  <%= select_tag(:departure_date,options_for_select(@departure_dates))%>
+  <%= label_tag(:arrival_port,"Arrival Airport:")%>
+  <%=select_tag(:arrival_port, options_for_select(@airports)) %>
+
+  </br>
+  <%=submit_tag("Find Matching Flights", name: "")%>
+<%end%>
+
+
+<table>
+	<tr>
+		<th> Select </th>
+		<th> Departure Airport </th>
+		<th> Arrival Airport </th>
+		<th> Departure Date </th>
+		<th> Arrival Date </th>
+	<tr>
+<%=form_tag(new_booking_path, method: :get) do %>
+<%=hidden_field_tag(:num_pass, @num_pass) %>
+<% @potential_flights.each do |flight| %>
+  <tr>
+  	<td> <%=radio_button_tag(:flight_id, flight.id)%> </td>
+  	<td> <%=flight.departure_port.location%> </td>
+  	<td> <%=flight.arrival_port.location%> </td>
+  	<td> <%=flight.departure_date%> </td>
+  	<td> <%=flight.arrival_date%> </td>
+  </tr>
+ <%end%>
+  </table>
+  <%=submit_tag("Book Selected Flight", name: "")%>
+  <%end%>
