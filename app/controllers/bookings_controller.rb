@@ -15,6 +15,8 @@ class BookingsController < ApplicationController
 	  @booking = Booking.new(booking_params)
 
 	  if @booking.save
+	  	  @passenger = @booking.passengers.first
+	  	  PassengerMailer.passenger_email(@passenger).deliver_now
       	redirect_to @booking
       else
       	render 'new'
